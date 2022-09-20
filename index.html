@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>금붕어 밥 뺏어먹기</title>
+	<style type="text/css">
+		html{font-family: 'Noto Sans KR', sans-serif; }
+		body{margin: 0; cursor: url(hand.png)2 2, auto;}
+		h1{margin: 0; margin-left: 50px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; margin-bottom: 5px;}
+
+		section{height: 950px;}
+		button{background-color: blue; color: white; border-radius: 50px; border-style: none; padding-top: 3px; padding-bottom: 5px;font-family: 'Noto Sans KR', sans-serif; font-weight: 400;}
+		button:hover{background-color: white; color: blue;  border-style: solid; border-radius: 50px; border-color: blue;}
+		.bg{background: url(water.jpg); background-size: cover;  background-position: 0px 0px;}
+		#move1{width: 100vw; height: 30vh; background: url(fish1.png); background-size: 300px auto; background-repeat: no-repeat;  animation: shift 8s infinite linear;}
+		
+		#move2{width: 100vw; height: 30vh; background: url(fish2.png); background-size: 300px auto; background-repeat: no-repeat;animation: shift 14s infinite linear;}
+	
+		#move3{width: 100vw; height: 30vh; background: url(fish3.png); background-size: 300px auto; background-repeat: no-repeat;animation: shift 10s infinite linear;}
+	
+		.box{width: 30px; height: 30px; border-radius: 50%; position: absolute; left: 100px; top: 100px; background: red;}
+		.title{background-color: white; display: flex;}
+		.button{position: absolute; top: 0; right: 50px;}
+		#control{margin: auto; margin-top: 30px;}
+		#move3{transform: rotateY(180deg);}
+
+		@keyframes shift{
+			from{background-position: -300px 0px;}
+			to{background-position: 2000px 0px;}
+		}
+		h1{color: red;}
+
+
+		img{width: 100%;}
+
+	</style>
+</head>
+<body>
+	<section class="bg">
+	<div class=title id="w1"><h1>금붕어 밥 뺏어먹기</h1>
+		
+		
+		<div class="button">
+		<input type="color" id="c1" style="margin-top: 4px;">
+		<button id="underwaterBut">underwater</button>
+		<audio id="underwaterSnd" src="underwater.wav"></audio>
+		<button id="stopBut">stop</button>
+		</div>
+	</div>
+
+	<div id="container">
+		<div id="move1"></div>
+		<div id="move3"></div>
+		<div id="move2"></div>
+	<input type="range" id="control" step="0.1" min="0.2" max="5" value="2">
+	<input type="range" id="control3d" step="1" min="0" max="360" value="0">
+	</div>
+	</section>
+
+	<script type="text/javascript">
+		underwaterBut.onclick = function(){
+			underwaterSnd.play();
+		}
+		stopBut.onclick = function(){
+			underwaterSnd.pause();
+		}
+
+	move1.onmouseover = function(){
+ 			move1.'backgroundUrl = "fish1ang.png"';
+ 		}
+ 		move1.onmouseout = function(){
+ 			move1.'backgroundUrl = "fish1.png"';
+ 		}
+
+		makeBox();
+		function makeBox(){
+		var a = document.createElement("div");
+		a. id = "square";
+		a. className = "box";
+		var b = Math.random()*window.innerWidth;
+		var c = Math.random()*window.innerHeight;
+		a.style.left = b + "px";
+		a.style.top = c + "px";
+		a.onclick = function(){
+			a.parentNode.removeChild(a);
+			makeBox();
+		}
+		document.body.appendChild(a);
+		}
+
+		c1.oninput = function(){
+		w1.style.background = c1.value;
+		m1.innerHTML = c1.value;
+		}
+
+		control.oninput = function(){
+ 			move1.style.animationDuration = control.value + "s";
+ 			move2.style.animationDuration = control.value + "s";
+ 			move3.style.animationDuration = control.value + "s";
+
+ 		}
+ 		control3d.oninput = function(){
+ 			move1.style.transform = "rotateZ("+control3d.value+"deg)"
+ 			move2.style.transform = "rotateZ("+control3d.value+"deg)"
+ 			move3.style.transform = "rotateZ("+control3d.value+"deg)"
+ 		}
+
+ 		
+
+
+
+		
+	</script>
+
+</body>
+</html>
